@@ -1,5 +1,6 @@
 <?php
 
+// array de categorias
 $categorias = [];
 $categorias[] = 'infantil';
 $categorias[] = 'adolescente';
@@ -9,38 +10,58 @@ $categorias[] = 'idoso';
 $nome = $_POST["nome"];
 $idade = $_POST["idade"];
 
+$categoria_final;
 
-if($idade >= 6 && $idade <=12)
+// verificação da quantidade minima e máxima de caracteres em Nome
+switch (true)
 {
-  for($i = 0; $i <=count($categorias); $i++)
-  {
-    if($categorias[$i] == 'infantil')
-      echo "O nadador ", $nome, " compete na categoria ", $categorias[$i];
-  }
+case (empty($nome)):
+  echo "O nome não pode ser vazio";
+  break;
+case (strlen($nome)) < 3:
+  echo "O nome deve conter mais de 3 caracteres";
+  break;
+case (strlen($nome)) > 30:
+  echo "O nome informado é muito extenso!";
+  break;
 }
-else if($idade >= 13 && $idade <=18)
+
+// Estrutura responsável por verificar a categoria correspondente a idade
+switch (true)
 {
-  for($i = 0; $i <=count($categorias); $i++)
-  {
-    if($categorias[$i] == 'adolescente')
-      echo "O nadador ", $nome, " compete na categoria ", $categorias[$i];
-  }
+  case ($idade >= 0 && $idade <=12):
+      for($i = 0; $i <=count($categorias); $i++)
+      {
+        if($categorias[$i] == 'infantil')
+          $categoria_final = $categorias[$i];  // A variável $categoria_final recebe a categoria identificada
+      }
+      break;
+  
+  case ($idade >= 13 && $idade <=18):
+      for($i = 0; $i <=count($categorias); $i++)
+      {
+        if($categorias[$i] == 'adolescente')
+          $categoria_final = $categorias[$i];
+      }
+      break;
+
+  case ($idade >= 19 && $idade <=60):
+      for($i = 0; $i <=count($categorias); $i++)
+      {
+        if($categorias[$i] == 'adulto')
+          $categoria_final = $categorias[$i];
+      }
+      break;
+
+  case ($idade >= 61 && $idade <=130):
+      for($i = 0; $i <=count($categorias); $i++)
+      {
+        if($categorias[$i] == 'idoso')
+          $categoria_final = $categorias[$i];
+      }
+      break;
 }
-else if($idade >= 19 && $idade <=60)
-{
-  for($i = 0; $i <=count($categorias); $i++)
-  {
-    if($categorias[$i] == 'adulto')
-      echo "O nadador ", $nome, " compete na categoria ", $categorias[$i];
-  }
-}
-else if($idade >= 61 && $idade <=150)
-{
-  for($i = 0; $i <=count($categorias); $i++)
-  {
-    if($categorias[$i] == 'idoso')
-      echo "O nadador ", $nome, " compete na categoria ", $categorias[$i];
-  }
-}
+// Imprime o nome e a categoria identificada pela idade informada
+echo "O(A) nadador(a) ", $nome, " compete na categoria ", $categoria_final; 
 
 ?>
