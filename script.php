@@ -9,11 +9,8 @@ $categorias[] = 'idoso';
 $nome = $_POST["nome"];
 $idade = $_POST["idade"];
 
-var_dump($nome);
-var_dump($idade);
 
-return 0;
-/*if($idade >= 6 && $idade <=12)
+if($idade >= 6 && $idade <=12)
 {
   for($i = 0; $i <=count($categorias); $i++)
   {
@@ -44,6 +41,6 @@ else if($idade >= 61 && $idade <=150)
     if($categorias[$i] == 'idoso')
       echo "O nadador ", $nome, " compete na categoria ", $categorias[$i];
   }
-}*/
+}
 
 ?>
