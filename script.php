@@ -15,20 +15,22 @@ $categoria_final;
 // verificação da quantidade minima e máxima de caracteres em Nome
 switch (true)
 {
-case (empty($nome)):
-  echo "O nome não pode ser vazio";
-  break;
-case (strlen($nome)) < 3:
-  echo "O nome deve conter mais de 3 caracteres";
-  break;
-case (strlen($nome)) > 30:
-  echo "O nome informado é muito extenso!";
-  break;
+  case (empty($nome)):
+    echo "O nome não pode ser vazio";
+    break;
+  case (strlen($nome)) < 3:
+    echo "O nome deve conter mais de 3 caracteres";
+    break;
+  case (strlen($nome)) > 30:
+    echo "O nome informado é muito extenso!";
+    break;
 }
 
-// Estrutura responsável por verificar a categoria correspondente a idade
-switch (true)
+// Estrutura responsável por verificar a categoria correspondente a idade e se o input é numérico
+if(is_numeric($idade))
 {
+  switch (true)
+  {
   case ($idade >= 0 && $idade <=12):
       for($i = 0; $i <=count($categorias); $i++)
       {
@@ -60,8 +62,14 @@ switch (true)
           $categoria_final = $categorias[$i];
       }
       break;
+    
+  }
+  // Imprime no fim do switch a categoria correspondente a idade informada
+  echo "O(A) nadador(a) ", $nome, " compete na categoria ", $categoria_final;
 }
-// Imprime o nome e a categoria identificada pela idade informada
-echo "O(A) nadador(a) ", $nome, " compete na categoria ", $categoria_final; 
+else
+{
+  echo "O que foi informado no campo Idade é invalido.";
+}
 
 ?>
