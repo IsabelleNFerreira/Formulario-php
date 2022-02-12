@@ -19,6 +19,8 @@
 
 <form action = 'script.php' method="post">
   <?php
+  //Se a mensagem de erro nao estiver vazia, imprime a mensagem correspondente
+  //Para criar outras variaveis de sessão, apenas repetir os passos
     $mensagemDeErro = isset($_SESSION['mensagem de erro']) ? $_SESSION['mensagem de erro'] : '';
     if(!empty($mensagemDeErro))
     {

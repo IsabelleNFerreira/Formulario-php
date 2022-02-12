@@ -17,7 +17,7 @@ $categoria_final;
 // verificação da quantidade minima e máxima de caracteres em Nome
 if (empty($nome))
 {
-  $_SESSION['mensagem de erro'] = "O nome não pode ser vazio, preencha o formulário novamente.";
+  $_SESSION['mensagem de erro'] = "O nome não pode ser vazio.";
   header('Location: index.php');
   return;
 }
