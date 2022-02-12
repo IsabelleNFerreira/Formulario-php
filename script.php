@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // array de categorias
 $categorias = [];
 $categorias[] = 'infantil';
@@ -13,18 +15,25 @@ $idade = $_POST["idade"];
 $categoria_final;
 
 // verificação da quantidade minima e máxima de caracteres em Nome
-switch (true)
+if (empty($nome))
 {
-  case (empty($nome)):
-    echo "O nome não pode ser vazio";
-    break;
-  case (strlen($nome)) < 3:
-    echo "O nome deve conter mais de 3 caracteres";
-    break;
-  case (strlen($nome)) > 30:
-    echo "O nome informado é muito extenso!";
-    break;
+  $_SESSION['mensagem de erro'] = "O nome não pode ser vazio, preencha o formulário novamente.";
+  header('Location: index.php');
+  return;
 }
+  else if ((strlen($nome)) < 3)
+  {
+    
+    $_SESSION['mensagem de erro'] = "O nome deve conter mais de 3 caracteres, preencha o formulário novamente.";
+    header('Location: index.php');
+    return;
+  }
+  else if ((strlen($nome)) > 40)
+  {
+    $_SESSION['mensagem de erro'] = "O nome informado é muito extenso, preencha o formulário novamente.";
+    header('Location: index.php');
+    return;
+  }
 
 // Estrutura responsável por verificar a categoria correspondente a idade e se o input é numérico
 if(is_numeric($idade))
@@ -69,7 +78,19 @@ if(is_numeric($idade))
 }
 else
 {
-  echo "O que foi informado no campo Idade é invalido.";
+   $_SESSION['mensagem de erro'] = "O que foi informado no campo Idade é inválido, preencha o formulário novamente.";
+  header('Location: index.php');
 }
 
 ?>
+
+<!DOCTYPE>
+
+<html>
+
+<form action = 'script.php' method="post">
+  <p><input type="submit" value="Voltar" name="Botao" /></p>
+  <meta http-equiv="Location" content="index.php">
+</form>
+
+</html>
